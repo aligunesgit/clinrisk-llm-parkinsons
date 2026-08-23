@@ -1,0 +1,23 @@
+{
+  "name": "ClinRisk-LLM distilled policy",
+  "generator": "Claude Sonnet 5 via Claude Code CLI",
+  "generated_on": "2026-08-23",
+  "test_independent": true,
+  "allowed_inputs": [
+    "budget_fraction", "oof_sensitivity", "oof_specificity",
+    "labeled_prevalence", "median_abs_margin",
+    "negative_fraction_unlabeled", "oof_sensitivity_trend"
+  ],
+  "thresholds": {
+    "sensitivity_very_low": 0.60,
+    "sensitivity_low": 0.75,
+    "specificity_critical": 0.50,
+    "specificity_low": 0.60,
+    "specificity_adequate": 0.70,
+    "margin_low": 0.10,
+    "negative_fraction_high": 0.85,
+    "late_budget": 0.85
+  },
+  "defaults": {"risk_weight": 2, "negative_query_priority": 2},
+  "summary": "Protect specificity first; escalate risk only with adequate specificity headroom and poor OOF sensitivity; use negative-side querying as the preferred targeted lever; smooth changes by one level and freeze risk late in the budget."
+}
