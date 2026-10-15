@@ -1,0 +1,263 @@
+{
+  "n_generated": 10,
+  "n_valid": 10,
+  "invalid": {},
+  "per_policy": {
+    "policy_00": {
+      "gait": {
+        "cost4": 52.1,
+        "fnr": 0.10833333333333332,
+        "specificity": 0.36742424242424243,
+        "balanced_accuracy": 0.6295454545454544,
+        "risk_weight": 2.8666666666666667,
+        "n_failed_runs": 0
+      },
+      "speech": {
+        "cost4": 24.599999999999998,
+        "fnr": 0.024107142857142858,
+        "specificity": 0.313157894736842,
+        "balanced_accuracy": 0.6445253759398496,
+        "risk_weight": 1.0,
+        "n_failed_runs": 0
+      }
+    },
+    "policy_01": {
+      "gait": {
+        "cost4": 57.0,
+        "fnr": 0.15,
+        "specificity": 0.4681818181818182,
+        "balanced_accuracy": 0.659090909090909,
+        "risk_weight": 2.15,
+        "n_failed_runs": 0
+      },
+      "speech": {
+        "cost4": 24.91111111111111,
+        "fnr": 0.02470238095238095,
+        "specificity": 0.30789473684210517,
+        "balanced_accuracy": 0.6415961779448621,
+        "risk_weight": 1.0,
+        "n_failed_runs": 0
+      }
+    },
+    "policy_02": {
+      "gait": {
+        "cost4": 53.36666666666667,
+        "fnr": 0.11904761904761904,
+        "specificity": 0.3931818181818182,
+        "balanced_accuracy": 0.6370670995670995,
+        "risk_weight": 2.533333333333333,
+        "n_failed_runs": 0
+      },
+      "speech": {
+        "cost4": 24.84444444444444,
+        "fnr": 0.024404761904761905,
+        "specificity": 0.3070175438596491,
+        "balanced_accuracy": 0.6413063909774436,
+        "risk_weight": 1.0,
+        "n_failed_runs": 0
+      }
+    },
+    "policy_03": {
+      "gait": {
+        "cost4": 55.13333333333333,
+        "fnr": 0.12976190476190477,
+        "specificity": 0.40757575757575754,
+        "balanced_accuracy": 0.6389069264069265,
+        "risk_weight": 2.4,
+        "n_failed_runs": 0
+      },
+      "speech": {
+        "cost4": 24.8,
+        "fnr": 0.024404761904761905,
+        "specificity": 0.3087719298245613,
+        "balanced_accuracy": 0.6421835839598997,
+        "risk_weight": 1.0,
+        "n_failed_runs": 0
+      }
+    },
+    "policy_04": {
+      "gait": {
+        "cost4": 55.8,
+        "fnr": 0.1357142857142857,
+        "specificity": 0.4227272727272728,
+        "balanced_accuracy": 0.6435064935064936,
+        "risk_weight": 2.316666666666667,
+        "n_failed_runs": 0
+      },
+      "speech": {
+        "cost4": 24.711111111111112,
+        "fnr": 0.024404761904761898,
+        "specificity": 0.3122807017543859,
+        "balanced_accuracy": 0.6439379699248118,
+        "risk_weight": 1.0,
+        "n_failed_runs": 0
+      }
+    },
+    "policy_05": {
+      "gait": {
+        "cost4": 55.266666666666666,
+        "fnr": 0.12321428571428572,
+        "specificity": 0.37121212121212116,
+        "balanced_accuracy": 0.6239989177489178,
+        "risk_weight": 2.6,
+        "n_failed_runs": 0
+      },
+      "speech": {
+        "cost4": 24.488888888888887,
+        "fnr": 0.02321428571428571,
+        "specificity": 0.3070175438596491,
+        "balanced_accuracy": 0.6419016290726817,
+        "risk_weight": 1.0,
+        "n_failed_runs": 0
+      }
+    },
+    "policy_06": {
+      "gait": {
+        "cost4": 54.86666666666667,
+        "fnr": 0.1238095238095238,
+        "specificity": 0.38333333333333336,
+        "balanced_accuracy": 0.6297619047619046,
+        "risk_weight": 2.65,
+        "n_failed_runs": 0
+      },
+      "speech": {
+        "cost4": 25.044444444444444,
+        "fnr": 0.025297619047619044,
+        "specificity": 0.30964912280701745,
+        "balanced_accuracy": 0.6421757518796993,
+        "risk_weight": 1.0,
+        "n_failed_runs": 0
+      }
+    },
+    "policy_07": {
+      "gait": {
+        "cost4": 56.766666666666666,
+        "fnr": 0.1363095238095238,
+        "specificity": 0.40378787878787886,
+        "balanced_accuracy": 0.6337391774891775,
+        "risk_weight": 2.7,
+        "n_failed_runs": 0
+      },
+      "speech": {
+        "cost4": 24.88888888888889,
+        "fnr": 0.02470238095238095,
+        "specificity": 0.30877192982456136,
+        "balanced_accuracy": 0.6420347744360902,
+        "risk_weight": 1.0,
+        "n_failed_runs": 0
+      }
+    },
+    "policy_08": {
+      "gait": {
+        "cost4": 56.4,
+        "fnr": 0.1261904761904762,
+        "specificity": 0.36060606060606065,
+        "balanced_accuracy": 0.6172077922077922,
+        "risk_weight": 2.933333333333333,
+        "n_failed_runs": 0
+      },
+      "speech": {
+        "cost4": 24.755555555555553,
+        "fnr": 0.02410714285714285,
+        "specificity": 0.3070175438596491,
+        "balanced_accuracy": 0.641455200501253,
+        "risk_weight": 1.0,
+        "n_failed_runs": 0
+      }
+    },
+    "policy_09": {
+      "gait": {
+        "cost4": 56.63333333333333,
+        "fnr": 0.12916666666666668,
+        "specificity": 0.3704545454545455,
+        "balanced_accuracy": 0.6206439393939394,
+        "risk_weight": 2.85,
+        "n_failed_runs": 0
+      },
+      "speech": {
+        "cost4": 24.733333333333334,
+        "fnr": 0.02410714285714285,
+        "specificity": 0.30789473684210517,
+        "balanced_accuracy": 0.6418937969924811,
+        "risk_weight": 1.0,
+        "n_failed_runs": 0
+      }
+    }
+  },
+  "across_policies": {
+    "gait": {
+      "cost4": {
+        "mean": 55.33333333333333,
+        "sd": 1.5798108966378857,
+        "min": 52.1,
+        "max": 57.0
+      },
+      "fnr": {
+        "mean": 0.12815476190476188,
+        "sd": 0.011192481245566183,
+        "min": 0.10833333333333332,
+        "max": 0.15
+      },
+      "specificity": {
+        "mean": 0.3948484848484849,
+        "sd": 0.03267797758989028,
+        "min": 0.36060606060606065,
+        "max": 0.4681818181818182
+      },
+      "balanced_accuracy": {
+        "mean": 0.6333468614718614,
+        "sd": 0.012235662645742013,
+        "min": 0.6172077922077922,
+        "max": 0.659090909090909
+      },
+      "risk_weight": {
+        "mean": 2.6,
+        "sd": 0.25482988758177144,
+        "min": 2.15,
+        "max": 2.933333333333333
+      },
+      "cost4_ci_of_mean": [
+        55.33333333333333,
+        54.336666666666666,
+        56.18008333333332
+      ]
+    },
+    "speech": {
+      "cost4": {
+        "mean": 24.77777777777778,
+        "sd": 0.15921618711262772,
+        "min": 24.488888888888887,
+        "max": 25.044444444444444
+      },
+      "fnr": {
+        "mean": 0.024345238095238093,
+        "sd": 0.0005397408932037878,
+        "min": 0.02321428571428571,
+        "max": 0.025297619047619044
+      },
+      "specificity": {
+        "mean": 0.3089473684210525,
+        "sd": 0.002180275073954054,
+        "min": 0.3070175438596491,
+        "max": 0.313157894736842
+      },
+      "balanced_accuracy": {
+        "mean": 0.6423010651629073,
+        "sd": 0.0010674256642974871,
+        "min": 0.6413063909774436,
+        "max": 0.6445253759398496
+      },
+      "risk_weight": {
+        "mean": 1.0,
+        "sd": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "cost4_ci_of_mean": [
+        24.77777777777778,
+        24.684388888888886,
+        24.871111111111112
+      ]
+    }
+  }
+}
