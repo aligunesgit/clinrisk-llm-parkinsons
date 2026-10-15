@@ -105,7 +105,7 @@ loader treats an empty file as unreadable, so a truncated download changes the r
 Results were produced with Python 3.9.6, scikit-learn 1.6.1, NumPy 2.0.2, SciPy 1.13.1,
 pandas 2.3.3 and matplotlib 3.9.4 on macOS (Apple silicon), and with Claude Code CLI 2.1.300 for policy
 generation. The exact version of this repository used for the revised manuscript is tagged
-`ijms-revision-1`; its commit hash is listed in the GitHub release of that tag.
+`ijms-revision-1` (commit `ece1b8dd6d8191d9676765c297ac44e57abcd221`).
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
