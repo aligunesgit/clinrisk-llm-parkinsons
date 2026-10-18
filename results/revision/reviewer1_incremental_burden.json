@@ -1,0 +1,66 @@
+{
+  "gait@0.01": {
+    "additional_cases": 1.8809523809523807,
+    "additional_unnecessary_tests": 418.5,
+    "additional_total_tests": 420.3809523809524,
+    "total_tests_per_additional_case": 223.493670886076,
+    "unnecessary_tests_per_additional_case": 222.493670886076,
+    "break_even_fn_fp_ratio_vs_standard": 222.493670886076
+  },
+  "gait@0.05": {
+    "additional_cases": 9.404761904761903,
+    "additional_unnecessary_tests": 401.59090909090907,
+    "additional_total_tests": 410.995670995671,
+    "total_tests_per_additional_case": 43.70080552359034,
+    "unnecessary_tests_per_additional_case": 42.70080552359034,
+    "break_even_fn_fp_ratio_vs_standard": 42.70080552359034
+  },
+  "gait@0.1": {
+    "additional_cases": 18.809523809523807,
+    "additional_unnecessary_tests": 380.45454545454555,
+    "additional_total_tests": 399.26406926406935,
+    "total_tests_per_additional_case": 21.22669735327964,
+    "unnecessary_tests_per_additional_case": 20.22669735327964,
+    "break_even_fn_fp_ratio_vs_standard": 20.22669735327964
+  },
+  "gait@0.3": {
+    "additional_cases": 56.42857142857142,
+    "additional_unnecessary_tests": 295.9090909090909,
+    "additional_total_tests": 352.3376623376623,
+    "total_tests_per_additional_case": 6.243958573072497,
+    "unnecessary_tests_per_additional_case": 5.243958573072497,
+    "break_even_fn_fp_ratio_vs_standard": 5.243958573072497
+  },
+  "speech@0.01": {
+    "additional_cases": 0.10714285714285685,
+    "additional_unnecessary_tests": 70.34210526315789,
+    "additional_total_tests": 70.44924812030075,
+    "total_tests_per_additional_case": 657.5263157894755,
+    "unnecessary_tests_per_additional_case": 656.5263157894755,
+    "break_even_fn_fp_ratio_vs_standard": 656.5263157894755
+  },
+  "speech@0.05": {
+    "additional_cases": 0.5357142857142843,
+    "additional_unnecessary_tests": 67.49999999999999,
+    "additional_total_tests": 68.03571428571426,
+    "total_tests_per_additional_case": 127.0000000000003,
+    "unnecessary_tests_per_additional_case": 126.00000000000031,
+    "break_even_fn_fp_ratio_vs_standard": 126.00000000000031
+  },
+  "speech@0.1": {
+    "additional_cases": 1.0714285714285685,
+    "additional_unnecessary_tests": 63.94736842105264,
+    "additional_total_tests": 65.0187969924812,
+    "total_tests_per_additional_case": 60.68421052631595,
+    "unnecessary_tests_per_additional_case": 59.68421052631596,
+    "break_even_fn_fp_ratio_vs_standard": 59.68421052631596
+  },
+  "speech@0.3": {
+    "additional_cases": 3.214285714285712,
+    "additional_unnecessary_tests": 49.73684210526316,
+    "additional_total_tests": 52.95112781954887,
+    "total_tests_per_additional_case": 16.473684210526326,
+    "unnecessary_tests_per_additional_case": 15.473684210526326,
+    "break_even_fn_fp_ratio_vs_standard": 15.473684210526326
+  }
+}

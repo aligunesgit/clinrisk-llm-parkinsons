@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results" / "revised_cal"
 FIGS = ROOT / "manuscripts" / "figures"
-FIGS.mkdir(exist_ok=True)
+FIGS.mkdir(parents=True, exist_ok=True)
 
 plt.rcParams.update({
     "font.size": 9, "axes.labelsize": 9, "axes.titlesize": 9.5,

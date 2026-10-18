@@ -19,4 +19,5 @@ step env POLICY_MODEL=claude-opus-5-5 python3 policy_regeneration.py evaluate
 step env POLICY_MODEL=claude-haiku-5-5 python3 policy_regeneration.py evaluate
 step python3 make_revision_figures.py
 step python3 make_supplements.py
+step python3 reviewer1_operating_sensitivity.py
 echo "ALL DONE"

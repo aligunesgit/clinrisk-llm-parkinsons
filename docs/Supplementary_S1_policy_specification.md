@@ -1,7 +1,7 @@
 # Supplementary File S1 — ClinRisk-LLM safety specification and frozen policy
 
 ## S1.1 Provenance
-The policy evaluated in the main analyses was generated on 23 August 2026 with Claude Sonnet 5 through the Claude Code CLI. The verbatim prompt of that generation was not archived. The specification below was written out from the documented design (allowed inputs, action space and the four safety clauses) during revision. It is the exact text used for every regeneration in Supplementary File S2.
+The policy evaluated in the main analyses was generated on 23 August 2026 with Claude Sonnet 5 through the Claude Code CLI. The verbatim prompt of that generation was not archived. The specification below was written out from the documented design (allowed inputs, action space and the four safety clauses) during revision. It is the archived user prompt passed to the CLI for regeneration in Supplementary File S2; the complete system prompt and CLI-injected context were not archived. Replaying stored policies is distinct from generating new policies.
 
 ## S1.2 Context variables
 | Symbol | Key | Definition |
@@ -98,3 +98,18 @@ def llm_policy(ctx, prev_r, prev_a):
     if ctx["budget"]>=.85: nr=prev_r
     return nr,na,"llm_distilled"
 ```
+
+## S1.6 Rationale and evidential status of the safeguards
+
+| Component | Design rationale | Evidential status |
+|---|---|---|
+| FN:FP = 4:1 | Study an asymmetric missed-case preference under one shared evaluation loss | Experimental preference; not elicited clinical utility |
+| Specificity guard and escalation conditions | Limit indiscriminate positive prediction while allowing sensitivity pressure | Methodological safeguards; not a clinical safety guarantee |
+| Specificity 0.50/0.60/0.70 and sensitivity 0.60/0.75 | Implement ordered guard and escalation branches | Frozen implementation cutoffs; not clinically validated limits |
+| Risk and query actions in {1,2,3,4} | Bound the policy's permitted adjustments | Restricted experimental action space |
+| Margin 0.10, negative fraction 0.85, prevalence [0.15,0.85] | Define additional feedback conditions | Heuristic implementation choices; margin is not a calibrated probability |
+| One-level changes and freeze at budget 0.85 | Reduce oscillation and late-stage variation | Stabilization heuristics; optimality not established |
+
+The frozen policy metadata records these cutoffs, but the missing original verbatim prompt prevents a complete audit of which numerical choices were prescribed in the input versus proposed in the original generation. No clinical derivation of these numerical cutoffs is claimed. The reconstruction prompt explicitly asks the model to choose numerical thresholds. The four principles are documented author-specified design goals.
+
+The OOF specificity guard uses a symmetric surrogate trained on actively selected labels. It neither enforces the specificity of the weighted classifier nor guarantees specificity on a new population. Static validity checks, specification consistency, clinical plausibility and demonstrated clinical safety are distinct forms of assessment. Independent clinical review has not been completed.
