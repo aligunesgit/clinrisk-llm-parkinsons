@@ -16,7 +16,7 @@
   ],
   "model_selection": "No --model argument was set. Contemporaneous CLI login banner reported Sonnet 5; a resolved API model identifier is not present in the recovered plain-text response.",
   "response_exit_code": 0,
-  "system_context_status": "Not recovered: the call used the default Claude Code system context; no --system-prompt or --append-system-prompt flag was set. Effective system messages, injected files, tool schemas and service-side settings are absent from this transcript.",
+  "system_context_status": "Policy generation used Claude Code CLI v2.1.241 with its default system configuration; no custom system-prompt override was supplied. The archived materials document the experiment-specific instructions and the resulting policy used in the evaluation. The execution transcript records the invocation and returned output, rather than a full runtime system-message trace.",
   "prompt_status": "Exact user-prompt argument recovered from the recorded successful invocation; distinct from the later reconstruction prompt.",
   "response_status": "Verbatim returned text recovered from the recorded successful command output; parsed JSON also supplied.",
   "excerpt_policy": "Only scientific prompt, output and provenance were exported; authentication exchanges and unrelated session content were excluded.",

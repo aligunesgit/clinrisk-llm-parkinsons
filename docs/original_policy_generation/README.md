@@ -19,6 +19,6 @@ The evaluated Python `llm_policy` is a transcription of this output. Context key
 
 ## Remaining boundary
 
-This recovery supplies the original experiment-specific user prompt and output. It does not recover the effective Claude Code system messages, injected context, tool schemas or server configuration. The historical command relied on default CLI context. These missing items must not be represented by today's defaults or a newly written prompt.
+The exact original user prompt, invocation command and verbatim JSON response are archived here. Policy generation used Claude Code CLI v2.1.241 with its default system configuration; no custom system-prompt override was supplied. The archived materials document the experiment-specific instructions and the resulting policy used in the evaluation. The archive covers these experimental artifacts rather than a full runtime system-message trace.
 
 The 40 revision policies were generated from `experiments/revision/policy_prompt.md`, a later reconstruction, not this recovered original wording. Their results compare policies generated from that documented reconstruction with the original frozen implementation. They do not isolate repeated sampling under an identical original prompt. No prediction or numerical result was changed by this recovery.

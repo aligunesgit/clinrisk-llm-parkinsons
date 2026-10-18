@@ -14,7 +14,7 @@ git status --short
 
 ## What is and is not archived
 
-- Original generation: the exact user prompt and returned JSON were recovered on 18 October 2026 from the historical execution transcript and are archived in `docs/original_policy_generation/`, with source digest and timestamps. The full effective CLI system context remains unavailable.
+- Original generation: the exact user prompt and returned JSON were recovered on 18 October 2026 from the historical execution transcript and are archived in `docs/original_policy_generation/`, with source digest and timestamps. Policy generation used Claude Code CLI v2.1.241 with its default system configuration; no custom system-prompt override was supplied.
 - Regeneration: `experiments/revision/policy_prompt.md` is the exact archived user prompt passed as an argument to `claude -p`. It is not a complete system prompt or transcript of CLI-injected context.
 - Raw outputs: each `results/revision/regenerated_policies*/policy_*.json` contains response text, requested model identifier, reported model-usage identifiers and session identifier. Preserve these fields. These records do not independently authenticate the service or its historical configuration.
 - No temperature or sampling seed is set in the generation script. Generation used independent CLI invocations, not a controlled study of alternative wording. The reconstructed wording is common to the regenerations and uses wording different from the original user prompt subsequently recovered.

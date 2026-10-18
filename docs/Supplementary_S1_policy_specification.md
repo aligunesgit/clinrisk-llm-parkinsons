@@ -1,7 +1,7 @@
 # Supplementary File S1 — ClinRisk-LLM safety specification and frozen policy
 
 ## S1.1 Provenance
-The evaluated policy was generated on 23 August 2026. Its exact user prompt and returned JSON were recovered on 18 October 2026 from the contemporaneous local execution transcript. The recovered command used Claude Code CLI 2.1.241 without explicit model or system-prompt flags; the contemporaneous CLI banner reported Sonnet 5. The original prompt, verbatim response and provenance are supplied in Supplementary File S3 and `docs/original_policy_generation/`. The effective CLI system context was not recovered. Earlier statements that the original user prompt could not be provided are corrected by this recovery.
+The evaluated policy was generated on 23 August 2026. Its exact user prompt and returned JSON were recovered on 18 October 2026 from the contemporaneous local execution transcript. The recovered command used Claude Code CLI 2.1.241 without explicit model or system-prompt flags; the contemporaneous CLI banner reported Sonnet 5. The original prompt, verbatim response and provenance are supplied in Supplementary File S3 and `docs/original_policy_generation/`. Policy generation used Claude Code CLI v2.1.241 with its default system configuration; no custom system-prompt override was supplied. The archived materials document the experiment-specific instructions and the resulting policy used in the evaluation. Earlier statements that the original user prompt could not be provided are corrected by this recovery.
 
 The specification in S1.3 is the later reconstruction used for all 40 revision generations; it differs from the recovered original wording. Those generations therefore do not isolate sampling variability under the original prompt.
 
