@@ -1,7 +1,9 @@
 # Supplementary File S1 — ClinRisk-LLM safety specification and frozen policy
 
 ## S1.1 Provenance
-The policy evaluated in the main analyses was generated on 23 August 2026 with Claude Sonnet 5 through the Claude Code CLI. The verbatim prompt of that generation was not archived. The specification below was written out from the documented design (allowed inputs, action space and the four safety clauses) during revision. It is the archived user prompt passed to the CLI for regeneration in Supplementary File S2; the complete system prompt and CLI-injected context were not archived. Replaying stored policies is distinct from generating new policies.
+The evaluated policy was generated on 23 August 2026. Its exact user prompt and returned JSON were recovered on 18 October 2026 from the contemporaneous local execution transcript. The recovered command used Claude Code CLI 2.1.241 without explicit model or system-prompt flags; the contemporaneous CLI banner reported Sonnet 5. The original prompt, verbatim response and provenance are supplied in Supplementary File S3 and `docs/original_policy_generation/`. The effective CLI system context was not recovered. Earlier statements that the original user prompt could not be provided are corrected by this recovery.
+
+The specification in S1.3 is the later reconstruction used for all 40 revision generations; it differs from the recovered original wording. Those generations therefore do not isolate sampling variability under the original prompt.
 
 ## S1.2 Context variables
 | Symbol | Key | Definition |
@@ -56,22 +58,34 @@ Use plain Python only: no imports, no attribute access, no I/O, no randomness. Y
   "generated_on": "2026-08-23",
   "test_independent": true,
   "allowed_inputs": [
-    "budget_fraction", "oof_sensitivity", "oof_specificity",
-    "labeled_prevalence", "median_abs_margin",
-    "negative_fraction_unlabeled", "oof_sensitivity_trend"
+    "budget_fraction",
+    "oof_sensitivity",
+    "oof_specificity",
+    "labeled_prevalence",
+    "median_abs_margin",
+    "negative_fraction_unlabeled",
+    "oof_sensitivity_trend"
   ],
   "thresholds": {
-    "sensitivity_very_low": 0.60,
+    "sensitivity_very_low": 0.6,
     "sensitivity_low": 0.75,
-    "specificity_critical": 0.50,
-    "specificity_low": 0.60,
-    "specificity_adequate": 0.70,
-    "margin_low": 0.10,
+    "specificity_critical": 0.5,
+    "specificity_low": 0.6,
+    "specificity_adequate": 0.7,
+    "margin_low": 0.1,
     "negative_fraction_high": 0.85,
     "late_budget": 0.85
   },
-  "defaults": {"risk_weight": 2, "negative_query_priority": 2},
-  "summary": "Protect specificity first; escalate risk only with adequate specificity headroom and poor OOF sensitivity; use negative-side querying as the preferred targeted lever; smooth changes by one level and freeze risk late in the budget."
+  "defaults": {
+    "risk_weight": 2,
+    "negative_query_priority": 2
+  },
+  "summary": "Protect specificity first; escalate risk only with adequate specificity headroom and poor OOF sensitivity; use negative-side querying as the preferred targeted lever; smooth changes by one level and freeze risk late in the budget.",
+  "generation_archive": "docs/original_policy_generation/",
+  "original_cli_version": "2.1.241",
+  "model_provenance": "Contemporaneous CLI banner reported Sonnet 5; no explicit --model argument or resolved API model identifier was recovered.",
+  "user_prompt_recovered_on": "2026-10-18",
+  "system_context_recovered": false
 }
 
 ```
@@ -110,6 +124,6 @@ def llm_policy(ctx, prev_r, prev_a):
 | Margin 0.10, negative fraction 0.85, prevalence [0.15,0.85] | Define additional feedback conditions | Heuristic implementation choices; margin is not a calibrated probability |
 | One-level changes and freeze at budget 0.85 | Reduce oscillation and late-stage variation | Stabilization heuristics; optimality not established |
 
-The frozen policy metadata records these cutoffs, but the missing original verbatim prompt prevents a complete audit of which numerical choices were prescribed in the input versus proposed in the original generation. No clinical derivation of these numerical cutoffs is claimed. The reconstruction prompt explicitly asks the model to choose numerical thresholds. The four principles are documented author-specified design goals.
+The recovered original prompt specifies allowed inputs, actions, asymmetric loss, test independence and conservative escalation/de-escalation goals. The numerical cutoffs, defaults, smoothing and late-budget freeze appear in the recovered LLM response. The four clauses in S1.3 summarize the design during revision; the original wording is supplied separately in S3. No clinical derivation of these numerical cutoffs is claimed.
 
 The OOF specificity guard uses a symmetric surrogate trained on actively selected labels. It neither enforces the specificity of the weighted classifier nor guarantees specificity on a new population. Static validity checks, specification consistency, clinical plausibility and demonstrated clinical safety are distinct forms of assessment. Independent clinical review has not been completed.

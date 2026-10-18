@@ -1,0 +1,28 @@
+{
+  "recovered_on": "2026-10-18",
+  "source_kind": "historical local Codex execution transcript",
+  "source_basename": "rollout-2026-08-23T13-37-12-01a02e32-2200-7b21-89c9-dc0831218d00.jsonl",
+  "source_sha256": "0f8c52a774ac4536ad7d187958799190880fbbc5f9933cfdca9cce0f0882d9f0",
+  "generation_command_line": 578,
+  "generation_timestamp_utc": "2026-08-23T11:38:44.539Z",
+  "response_line": 590,
+  "response_timestamp_utc": "2026-08-23T11:40:06.028Z",
+  "cli_version": "2.1.241",
+  "cli_version_evidence_line": 543,
+  "invocation_argv": [
+    "claude",
+    "-p",
+    "You are designing a test-independent adaptive cost policy for Parkinson biosignal active learning. The classifier is an RBF SVM. At each iteration the policy may observe only: budget_fraction in [0,1], 3-fold out-of-fold sensitivity and specificity on the currently labeled set (or null if unavailable), labeled PD prevalence, median absolute decision margin on the unlabeled pool, fraction of unlabeled predictions on the negative side, and recent OOF sensitivity trend. It must choose risk_weight r from {1,2,3,4} and negative_query_priority a from {1,2,3,4}. The downstream fixed evaluation loss is 4*FN+FP, but specificity collapse must be avoided. No held-out test signal is allowed. Produce a concise deterministic JSON decision policy with ordered rules, defaults, and brief rationale. Prefer conservative escalation: high r only when OOF sensitivity is poor and specificity remains adequate; de-escalate if specificity is poor. Output JSON only."
+  ],
+  "model_selection": "No --model argument was set. Contemporaneous CLI login banner reported Sonnet 5; a resolved API model identifier is not present in the recovered plain-text response.",
+  "response_exit_code": 0,
+  "system_context_status": "Not recovered: the call used the default Claude Code system context; no --system-prompt or --append-system-prompt flag was set. Effective system messages, injected files, tool schemas and service-side settings are absent from this transcript.",
+  "prompt_status": "Exact user-prompt argument recovered from the recorded successful invocation; distinct from the later reconstruction prompt.",
+  "response_status": "Verbatim returned text recovered from the recorded successful command output; parsed JSON also supplied.",
+  "excerpt_policy": "Only scientific prompt, output and provenance were exported; authentication exchanges and unrelated session content were excluded.",
+  "artifact_sha256": {
+    "response_verbatim.txt": "3f98f0788dd9617f8cc7f773d0f877ff69ccb40d1bdd3efa8e0c09fcee27c6df",
+    "user_prompt.txt": "ee4d9c5735add6a78b064163a3d946224c54b0a724cf675d3ad3cdf153358d6d",
+    "response.json": "0ef073c0700618c42488e6769298222de56698ac57389cd66fc13096745fb70f"
+  }
+}

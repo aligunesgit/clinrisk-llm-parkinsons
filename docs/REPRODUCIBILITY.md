@@ -14,13 +14,13 @@ git status --short
 
 ## What is and is not archived
 
-- Original generation: frozen policy implementation and metadata are present; the original verbatim prompt is unavailable.
+- Original generation: the exact user prompt and returned JSON were recovered on 18 October 2026 from the historical execution transcript and are archived in `docs/original_policy_generation/`, with source digest and timestamps. The full effective CLI system context remains unavailable.
 - Regeneration: `experiments/revision/policy_prompt.md` is the exact archived user prompt passed as an argument to `claude -p`. It is not a complete system prompt or transcript of CLI-injected context.
 - Raw outputs: each `results/revision/regenerated_policies*/policy_*.json` contains response text, requested model identifier, reported model-usage identifiers and session identifier. Preserve these fields. These records do not independently authenticate the service or its historical configuration.
-- No temperature or sampling seed is set in the generation script. Generation used independent CLI invocations, not a controlled study of alternative wording. The reconstructed wording is common to the regenerations and cannot recover the missing original wording.
+- No temperature or sampling seed is set in the generation script. Generation used independent CLI invocations, not a controlled study of alternative wording. The reconstructed wording is common to the regenerations and uses wording different from the original user prompt subsequently recovered.
 - Evaluation: archived code is statically checked and replayed with fixed analysis seeds. Replaying frozen policies is reproducible in a compatible environment; new generation need not return the same policies.
 
-Do not label a reconstructed user prompt as the original system prompt.
+Do not label either user prompt as the complete system prompt. See the recovery archive for original versus reconstructed wording and the numerical rules returned in the original generation.
 
 ## Data and preprocessing
 

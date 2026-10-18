@@ -1,0 +1,145 @@
+```json
+{
+  "policy_name": "pd_active_learning_cost_policy",
+  "version": "1.0",
+  "test_independent": true,
+  "inputs": {
+    "budget_fraction": "[0,1]",
+    "oof_sensitivity": "float in [0,1] or null (3-fold OOF on labeled set)",
+    "oof_specificity": "float in [0,1] or null (3-fold OOF on labeled set)",
+    "labeled_prevalence": "float in [0,1]",
+    "median_abs_margin": "float >= 0 (median |decision function| on unlabeled pool)",
+    "neg_fraction_unlabeled": "float in [0,1] (fraction of unlabeled predicted negative)",
+    "oof_sensitivity_trend": "enum: improving | flat | declining (over last 2-3 iterations)"
+  },
+  "outputs": {
+    "risk_weight": "int in {1,2,3,4}",
+    "negative_query_priority": "int in {1,2,3,4}"
+  },
+  "constants": {
+    "SENS_VERY_LOW": 0.60,
+    "SENS_LOW": 0.75,
+    "SPEC_CRITICAL": 0.50,
+    "SPEC_LOW": 0.60,
+    "SPEC_ADEQUATE": 0.70,
+    "PREVALENCE_MIN": 0.15,
+    "PREVALENCE_MAX": 0.85,
+    "MARGIN_LOW": 0.10,
+    "NEG_FRAC_HIGH": 0.85,
+    "LATE_BUDGET": 0.85,
+    "MAX_STEP_CHANGE": 1
+  },
+  "defaults": {
+    "risk_weight": 2,
+    "negative_query_priority": 2,
+    "rationale": "Neutral midpoint start; no directional bias until OOF signal exists, since 4*FN+FP asymmetry should only be exploited once sensitivity is measurably a problem, not assumed."
+  },
+  "risk_weight_rules": [
+    {
+      "id": "R0_cold_start",
+      "condition": "oof_sensitivity == null OR oof_specificity == null",
+      "value": 2,
+      "rationale": "Insufficient labeled/fold data for reliable OOF estimates; stay at neutral default to avoid overfitting policy decisions to noise."
+    },
+    {
+      "id": "R1_specificity_collapse_guard",
+      "condition": "oof_specificity < SPEC_CRITICAL",
+      "value": 1,
+      "rationale": "Highest-priority safety rule: specificity collapse is an explicit hard constraint. Force minimum risk weight regardless of sensitivity to stop the classifier from over-predicting positive.",
+      "priority": "overrides_all"
+    },
+    {
+      "id": "R2_specificity_low_cap",
+      "condition": "oof_specificity < SPEC_LOW",
+      "value": "min(previous_risk_weight, 2)",
+      "rationale": "Specificity is degraded but not critical; cap escalation at 2 so FN-weighting cannot keep pushing FP up while specificity is already fragile."
+    },
+    {
+      "id": "R3_escalate_severe",
+      "condition": "oof_specificity >= SPEC_ADEQUATE AND oof_sensitivity < SENS_VERY_LOW",
+      "value": 4,
+      "rationale": "Specificity has headroom and sensitivity is severely poor; the 4x FN penalty in the eval loss justifies maximal risk weight only when it is safe to spend that headroom."
+    },
+    {
+      "id": "R4_escalate_moderate",
+      "condition": "oof_specificity >= SPEC_ADEQUATE AND oof_sensitivity < SENS_LOW",
+      "value": 3,
+      "rationale": "Sensitivity is moderately poor with adequate specificity buffer; escalate one step below max to leave room for further escalation if the trend does not improve."
+    },
+    {
+      "id": "R5_trend_preempt",
+      "condition": "oof_specificity >= SPEC_ADEQUATE AND oof_sensitivity_trend == declining AND median_abs_margin >= MARGIN_LOW",
+      "value": "min(previous_risk_weight + 1, 4)",
+      "rationale": "Preemptive single-step escalation when sensitivity is trending down but margins are stable enough to trust the trend (not just noise near the boundary)."
+    },
+    {
+      "id": "R6_steady_state",
+      "condition": "otherwise",
+      "value": "previous_risk_weight",
+      "rationale": "No trigger condition met; hold current value rather than drifting, since unnecessary changes destabilize the active learning loop."
+    }
+  ],
+  "negative_query_priority_rules": [
+    {
+      "id": "A0_cold_start",
+      "condition": "oof_sensitivity == null OR oof_specificity == null",
+      "value": 2,
+      "rationale": "No reliable signal yet on which side of the boundary is under-sampled; stay neutral."
+    },
+    {
+      "id": "A1_specificity_collapse_guard",
+      "condition": "oof_specificity < SPEC_CRITICAL",
+      "value": 4,
+      "rationale": "Mirrors R1: aggressively query the negative-predicted region to acquire confirmed true-negative boundary examples and stabilize the specificity estimate, paired with risk_weight=1."
+    },
+    {
+      "id": "A2_specificity_low",
+      "condition": "oof_specificity < SPEC_LOW",
+      "value": 3,
+      "rationale": "Reinforce the negative region with labels to correct an over-permissive positive boundary before it worsens."
+    },
+    {
+      "id": "A3_mine_negatives_for_missed_positives",
+      "condition": "oof_specificity >= SPEC_ADEQUATE AND oof_sensitivity < SENS_LOW AND neg_fraction_unlabeled >= NEG_FRAC_HIGH",
+      "value": 3,
+      "rationale": "Sensitivity is poor and most of the unlabeled pool sits on the negative side; prioritize querying there to surface false negatives hiding in the negative-predicted mass, directly targeting the 4x-weighted FN term."
+    },
+    {
+      "id": "A4_low_margin_ambiguity",
+      "condition": "median_abs_margin < MARGIN_LOW AND oof_specificity >= SPEC_LOW",
+      "value": "max(previous_negative_query_priority, 3)",
+      "rationale": "Small median margin indicates many unlabeled points sit near the boundary; prefer resolving ambiguity via negative-side querying over reweighting (r), since labeling is a more targeted, lower-risk lever than changing the loss weighting."
+    },
+    {
+      "id": "A5_prevalence_imbalance",
+      "condition": "labeled_prevalence < PREVALENCE_MIN OR labeled_prevalence > PREVALENCE_MAX",
+      "value": "max(previous_negative_query_priority, 2)",
+      "rationale": "Skewed labeled prevalence makes OOF sensitivity/specificity estimates unstable; keep at least moderate negative-side sampling to diversify the labeled set and improve estimate reliability."
+    },
+    {
+      "id": "A6_steady_state",
+      "condition": "otherwise",
+      "value": "previous_negative_query_priority",
+      "rationale": "No trigger condition met; hold current value."
+    }
+  ],
+  "post_processing": [
+    {
+      "id": "P1_smoothing",
+      "rule": "|new_risk_weight - previous_risk_weight| <= MAX_STEP_CHANGE and |new_negative_query_priority - previous_negative_query_priority| <= MAX_STEP_CHANGE, except R1/A1 (specificity collapse guard) which may jump directly to {r=1, a=4}",
+      "rationale": "Conservative escalation: all non-emergency changes move one step at a time to prevent oscillation from noisy small-sample OOF estimates; the specificity-collapse guard is exempt because it is a hard safety constraint."
+    },
+    {
+      "id": "P2_late_budget_freeze",
+      "rule": "if budget_fraction >= LATE_BUDGET: risk_weight = previous_risk_weight (freeze); negative_query_priority may still adjust by up to 1 step",
+      "rationale": "Near budget exhaustion, changing the FN/FP tradeoff destabilizes the final labeled set right before evaluation; querying priority can still adapt since it only affects which points get labeled next, not the loss weighting."
+    },
+    {
+      "id": "P3_conflict_resolution",
+      "rule": "risk_weight_rules and negative_query_priority_rules are evaluated independently, first-match-wins within each list, then P1 and P2 applied in order",
+      "rationale": "Keeps the two decisions decoupled and deterministic: r controls how much the classifier itself is asked to favor recall, a controls where labeling effort is spent, so they should not be resolved by a single interleaved rule set."
+    }
+  ],
+  "rationale_summary": "Defaults hold at neutral (r=2, a=2) until OOF signal exists. Specificity collapse (oof_specificity < 0.50) is a hard, top-priority guard that forces r=1/a=4 to protect the explicit constraint, overriding the loss function's 4x FN bias. Risk weight escalates toward 4 only when specificity has headroom (>=0.70) and OOF sensitivity is poor, reflecting that the 4*FN+FP loss rewards recall but only when it's safe to spend specificity budget on it. Negative-side query priority is used as the primary lever for recovering specificity (targeted relabeling) and for mining missed positives out of a negative-skewed pool (targeting the 4x FN term) without touching the loss weighting itself. All non-emergency transitions are capped at one step per iteration and risk_weight is frozen late in the budget to keep the final labeled set and evaluation stable."
+}
+```
