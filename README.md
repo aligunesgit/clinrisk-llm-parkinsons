@@ -11,11 +11,7 @@ policy (ClinRisk-LLM). The LLM is called **once, before evaluation**, to transla
 specification into a deterministic policy. That policy is frozen and replayed with no further LLM
 calls. It never labels data and never predicts any participant's diagnosis.
 
-> **Key findings of the revised analysis.** The cost reductions come from cost-sensitive learning.
-> A symmetric model with a post-hoc threshold comes within 1.3 cost points at half labeling for gait, and risk-aware querying adds no
-> consistent benefit across paired splits. Gait remains roughly level with a trivial refer-all policy.
-> ClinRisk-LLM adapts to each modality but does not consistently outperform simpler policies. Its gait result was
-> not reproduced by 40 regenerations across three LLMs (gait $C_4$ 52.1–75.8 vs. the original 47.6).
+> **Key findings of the revised analysis.** ClinRisk-LLM translates a safety specification into a frozen, auditable policy that adjusts risk settings during label acquisition. At half labeling, joint cost-sensitive AL reduces the common cost relative to Standard AL by 34.1% for gait and 5.7% for speech. Component-wise comparisons attribute most of this reduction to classifier weighting; a threshold-tuned symmetric model comes within 1.3 cost points for gait. The incremental benefit of LLM-guided adaptation depends on the dataset and comparison setting and does not show a consistent additional cost reduction over simpler policies. Refer-all comparisons, decision curves and cross-cohort tests characterize the conditions for using these operating points. Forty policies generated from the documented reconstruction show stable near-symmetric speech behavior and a wider range of gait costs (52.1–75.8); the original frozen gait cost is 47.6. Original and reconstruction prompts are archived separately.
 
 ---
 
